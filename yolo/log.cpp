@@ -226,4 +226,12 @@ public:
     }
 };
 
+class ElapseLevelFormatItem : public LogFormatter::FormatItem {
+public:
+    void format(std::ostream& os, LogLevel::Level level, LogEvent::ptr event) override {
+        os << event->getElapse();
+    }
+};
+
+
 }

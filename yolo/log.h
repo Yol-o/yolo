@@ -92,7 +92,7 @@ public:
     typedef std::shared_ptr<Logger> ptr;
     
     Logger(const std::string& name = "root");
-    void log(LogLevel::Level level,LogEvent::ptr event);
+    void log(std::shared_ptr<Logger> logger, LogLevel::Level level,LogEvent::ptr event);
 
     void debug(LogEvent::ptr event);
     void info(LogEvent::ptr event);
