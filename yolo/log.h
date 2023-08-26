@@ -9,6 +9,8 @@
 #include <fstream>
 #include <iostream>
 #include <vector>
+#include <map>
+#include <functional>
 
 namespace yolo {
 
@@ -62,6 +64,7 @@ public:
     class FormatItem {
     public:
         typedef std::shared_ptr<FormatItem> ptr;
+        FormatItem(const std::string& fmt = ""){};
         virtual ~FormatItem() {}
         virtual void format(std::ostream& os, std::shared_ptr<Logger>, LogLevel::Level level, LogEvent::ptr event) = 0;
     };
@@ -94,7 +97,7 @@ public:
     typedef std::shared_ptr<Logger> ptr;
     
     Logger(const std::string& name = "root");
-    void log(std::shared_ptr<Logger> logger, LogLevel::Level level,LogEvent::ptr event);
+    void log(LogLevel::Level level,LogEvent::ptr event);
 
     void debug(LogEvent::ptr event);
     void info(LogEvent::ptr event);
