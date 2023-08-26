@@ -1,6 +1,7 @@
 #include "log.h"
 #include <map>
 #include <iostream>
+#include <functional>
 
 namespace yolo {
 
@@ -114,7 +115,7 @@ public:
 class StringFormatItem : public LogFormatter::FormatItem {
 public:
     StringFormatItem(const std::string& str)
-        :FormatItem(str),m_string(str) {
+        :m_string(str) {
         }
     void format(std::ostream& os, std::shared_ptr<Logger>, LogLevel::Level level, LogEvent::ptr event) override {
         os << m_string;
@@ -123,7 +124,9 @@ private:
     std::string m_string;
 };
 
-Logger::Logger(const std::string& name):m_name(name) {
+Logger::Logger(const std::string& name)
+    :m_name(name) {
+        m_formatter.reset(new LogFormatter("%d [%p] %f:%l"));
 }
 
 void Logger::addAppend(LogAppender::ptr appender)

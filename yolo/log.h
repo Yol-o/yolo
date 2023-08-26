@@ -8,7 +8,6 @@
 #include <sstream>
 #include <fstream>
 #include <vector>
-#include <functional>
 
 namespace yolo {
 
@@ -62,7 +61,6 @@ public:
     class FormatItem {
     public:
         typedef std::shared_ptr<FormatItem> ptr;
-        FormatItem(const std::string& fmt = ""){};
         virtual ~FormatItem() {}
         virtual void format(std::ostream& os, std::shared_ptr<Logger>, LogLevel::Level level, LogEvent::ptr event) = 0;
     };
@@ -112,6 +110,7 @@ private:
     std::string m_name;                         //日志名称
     LogLevel::Level m_level;                    //日志级别
     std::list<LogAppender::ptr> m_appenders;    //Appender集合
+    LogFormatter::ptr m_formatter;
 };
 
 // 输出到控制台的Appender
