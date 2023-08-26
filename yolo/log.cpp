@@ -1,4 +1,6 @@
 #include "log.h"
+#include <map>
+#include <iostream>
 
 namespace yolo {
 
@@ -145,9 +147,10 @@ void Logger::delAppend(LogAppender::ptr appender)
 void Logger::log(LogLevel::Level level,LogEvent::ptr event)
 {
     if (level >= m_level) {
+        auto self = shared_from_this();
         for(auto& i : m_appenders)
         {
-            i->log(level, event);
+            i->log(self, level, event);
         }
     }
 }
